@@ -4,3 +4,5 @@ DATABASE : team_database_1
 USERNAME : team_db_user_1
 PASSWORD : rAABg3YLd9zRNJFWSPC8
 HOST     : sql37.jnb2.host-h.net
+
+/* Database Config   */
