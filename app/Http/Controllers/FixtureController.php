@@ -27,7 +27,8 @@ class FixtureController extends Controller
      */
     public function create()
     {
-        //
+        $league = League::all();
+        return view('Pages.add-fixture')->with(['league'=>$league]);
     }
 
     /**

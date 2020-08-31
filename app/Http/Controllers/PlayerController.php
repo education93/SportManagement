@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Players;
+use App\League;
+use App\Database;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -23,7 +26,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        $league = League::all();
+        return view('Pages.add-players')->with(['league'=>$league]);
     }
 
     /**
