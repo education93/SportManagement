@@ -57,13 +57,9 @@
                     <li class="active">
                         <a href="#">League</a>
                         <ul class="tg-dropdown-menu">
-                            <li><a href="{{ url('/teams')}}/League 1">League 1</a>
-                                <ul class="tg-dropdown-menu">
-                                    <li><a href="{{ url('matchresult')}}/League 1">League 1 Results</a></li>
-                                    <li><a href="{{ url('matchresult')}}/League 2">League 2 Results</a></li>
-                                </ul>
-                            </li>
-                            <li class="active"><a href="{{ url('/teams')}}/League 2">League 2</a></li>
+                            @foreach ($league as $item)
+                            <li><a href="{{ url('teams')}}/{{$item->league_name}}">{{$item->league_name}}</a></li>
+                                @endforeach
                             
                         </ul>
                     </li>
@@ -71,8 +67,9 @@
                     <li>
                         <a href="#">Match Results</a>
                         <ul class="tg-dropdown-menu">
-                            <li><a href="{{ url('matchresult')}}/League 1">League 1 Results</a></li>
-                            <li><a href="{{ url('matchresult')}}/League 2">League 2 Results</a></li>
+                            @foreach ($league as $item)
+                            <li><a href="{{ url('matchresult')}}/{{$item->league_name}}">{{$item->league_name}} Results</a></li>
+                                @endforeach
                         </ul>
                     </li>
                 </ul>
@@ -82,18 +79,20 @@
                     <li>
                         <a href="#">fixtures</a>
                         <ul class="tg-dropdown-menu">
-                            <li><a href="{{ url('fixtures')}}/League 1">League 1 Fixtures</a></li>
-                            <li><a href="{{ url('fixtures')}}/League 2">League 2 Fixtures</a></li>
+                            <@foreach ($league as $item)
+                            <li><a href="{{ url('fixtures')}}/{{$item->league_name}}">{{$item->league_name}} Fixture</a></li>
+                                @endforeach
                         </ul>
                     </li>
                     <li>
                         <a href="#">Log Table</a>
                         <ul class="tg-dropdown-menu">
-                            <li><a href="{{ url('log-table')}}/League 1">League 1 Table</a></li>
-                            <li><a href="{{ url('log-table')}}/League 2">League 2 Table </a></li>
+                            @foreach ($league as $item)
+                            <li><a href="{{ url('log-table')}}/{{$item->league_name}}">{{$item->league_name}} Table</a></li>
+                                @endforeach
+                           
                         </ul>
                     </li>
-                    <li><a href="contactus">Contact</a></li>
                     <li>
                         <a href="#"><i class=" fa fa-navicon"></i></a>
                         <ul>
@@ -102,8 +101,6 @@
                             <li><a href="#">Referee</a></li>
                             <li><a href="#">Fixture</a></li>
                             <li><a href="#">Players</a></li>
-                           
-                            
                         </ul>
                     </li>
                 </ul>
@@ -191,35 +188,7 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                    <div class="tg-colhalf">
-                                        <ul class="tg-socialicons">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-linkedin"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-google-plus"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-dribbble"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
                             </nav>
                         </div>
@@ -277,19 +246,15 @@
                                                 
                                             </ul>
                                         </li>
-                                        <li><a href="contactus">Contact</a></li>
+                                        
                                         <li>
                                             <a href="#"><i class=" fa fa-navicon"></i></a>
                                             <ul>
-                                                <li><a href="aboutus">about us</a></li>
-                                                <li><a href="shoplist">shop list</a></li>
-                                                <li><a href="shopgrid">shop grid</a></li>
-                                                <li><a href="productsingle">shop detail</a></li>
-                                                <li><a href="bloglist">blog list</a></li>
-                                                <li><a href="bloggrid">blog grid</a></li>
-                                                <li><a href="blogdetail">blog detail</a></li>
-                                                <li><a href="404">404 error</a></li>
-                                                <li><a href="comming-soon">comming soon</a></li>
+                                                <li><a href="#">League</a></li>
+                                                <li><a href="#">Venue</a></li>
+                                                <li><a href="#">Referee</a></li>
+                                                <li><a href="#">Fixture</a></li>
+                                                <li><a href="#">Players</a></li>
                                             </ul>
                                         </li>
                                     </ul>
