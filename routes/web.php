@@ -24,7 +24,10 @@ Route::get('/matchresult/{league}', 'ResultsController@results');
 Route::get('/log-table/{league}', 'LogController@log');
 
 Route::resource('teams', 'TeamController');
+
+Route::post('/add/player/team', 'PlayerController@store');
 Route::resource('players', 'PlayerController');
+
 Route::resource('goals', 'GoalController');
 
 Route::post('/create/fixture/store', 'FixtureController@store');

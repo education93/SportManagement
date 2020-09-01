@@ -54,13 +54,15 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-12 col-xs-12">
-                                        <form action="#" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                        <form action="/add/player/team" method="post" class="tg-commentform help-form" id="tg-commentform" enctype="multipart/form-data">
+                                            @csrf
                                             <fieldset>
+                                                @include('layouts.messages')
                                                 <div class="form-group">
                                                     <input type="text" required="" placeholder="Full Name*" class="form-control" style="height:35px;" name="fullname">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" required="" placeholder="Jersey No*" class="form-control" style="height:35px;" name="Jerseyno">
+                                                    <input type="number" required="" placeholder="Jersey No*" class="form-control" style="height:35px;" name="Jerseyno">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="number" required="" placeholder="Age*" class="form-control" style="height:35px;" name="age">
@@ -79,7 +81,7 @@
                                                     <label class="custom-file-label" for="customFile">Upload Player Image</label>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" style="width: 100%; height:40px;" class="tg-btn submit-now">send</button>
+                                                    <button type="submit" style="width: 100%; height:40px;" class="tg-btn submit">send</button>
                                                 </div>
                                             </fieldset>
                                         </form>
