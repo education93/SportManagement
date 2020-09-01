@@ -145,7 +145,7 @@ button {
     border: none;
 }
 
-textarea,
+extarea,
 select,
 .tg-select select,
 .form-control,
@@ -166,11 +166,11 @@ input[type="color"],
 .uneditable-input {
     outline: none;
     color: #666;
-    height: 50px;
+    height: 4px;
     background: #fff;
     font-size: 14px;
     line-height: 20px;
-    padding: 15px 20px;
+    /* padding: 15px 20px; */
     display: inline-block;
     vertical-align: middle;
     border-radius: 0;
@@ -252,7 +252,7 @@ input:focus,
 }
 
 .tg-select select option {
-    color: #595959;
+    color: #373542;
 }
 
 .tg-select select option span {
@@ -287,7 +287,7 @@ input:focus,
 .tg-radio input[type=radio]+label:before {
     top: 4px;
     left: 0;
-    color: #595959;
+    color: #373542;
     font-size: 14px;
     line-height: 14px;
     content: "\f096";
@@ -328,7 +328,7 @@ input:focus,
 }
 
 .tg-checkbox input[type=checkbox]:checked+label {
-    color: #595959;
+    color: #373542;
 }
 
 

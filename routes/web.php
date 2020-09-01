@@ -26,6 +26,8 @@ Route::get('/log-table/{league}', 'LogController@log');
 Route::resource('teams', 'TeamController');
 Route::resource('players', 'PlayerController');
 Route::resource('goals', 'GoalController');
+
+Route::post('/create/fixture/store', 'FixtureController@store');
 Route::resource('fixtures', 'FixtureController');
 
 

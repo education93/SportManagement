@@ -161,6 +161,44 @@
     <script src="{{ asset('js/countTo.js') }}"></script>
     <script src="{{ asset('js/appear.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+
+    <script>
+        $("#matchDate").change(function(){
+
+
+
+            var GivenDate = $("#matchDate").val();
+            var CurrentDate = new Date();
+            GivenDate = new Date(GivenDate);
+
+            if(GivenDate > CurrentDate){
+                // alert('Given date is greater than the current date.');
+                $('#errorT').empty();
+                $("button").attr("disabled", false);
+                $('#btnSubmit').prop('disabled', false);
+            }else{
+                // alert('Given date is not greater than the current date.');
+                $('#errorT').html('There is no way a match can be for a previous date *');
+                $("button").attr("disabled", true);
+                $('#btnSubmit').prop('disabled', true);
+            }
+        
+        });
+        $("select").change(function(){
+         homeTeam = $("#homeTeam").val();
+         awayTeam = $("#awayTeam").val();
+         if(homeTeam ===awayTeam){
+            $('#btnSubmit').prop('disabled', true);
+            $("button").attr("disabled", true);
+            $('#errorM').html('You Cant Play same Team *');
+         }else{
+            $('#errorM').empty();
+            $("button").attr("disabled", false);
+            $('#btnSubmit').prop('disabled', false);
+         }
+        });
+    </script>
+
     <script>
         
         $('[data-countdown]').each(function() {

@@ -56,18 +56,20 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                @include('layouts.messages')
+                                
                                 <div class="row mt-5">
 
-                                    <form action="#" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                    <form action="/create/fixture/store" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                        @csrf 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <fieldset>
                                                 <div class="tg-select">
-                                                    <select name="home-team" style="height:35px;">
+                                                    <select id="homeTeam" name="home_team" style="height:35px;">
                                                         <option value="">Select Home Team*</option>
-                                                        <option value="Help">Discussion</option>
-                                                        <option value="Help">Help</option>
-                                                        <option value="Consutation">Consutation</option>
+                                                        @foreach ($teams as $team)
+                                                            <option>{{$team->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </fieldset>
@@ -76,11 +78,11 @@
                                             <fieldset>
                                                 <div class="form-group">
                                                     <div class="tg-select">
-                                                        <select name="away-team" style="height:35px;">
+                                                        <select id="awayTeam" name="away_team" style="height:35px;">
 															<option value="">Select Away Team*</option>
-															<option value="Help">Discussion</option>
-															<option value="Help">Help</option>
-															<option value="Consutation">Consutation</option>
+															@foreach ($teams as $team)
+                                                              <option >{{$team->name}}</option>
+                                                            @endforeach
 														</select>
                                                     </div>
                                                 </div>
@@ -90,14 +92,15 @@
 
                                         </div>
                                         <div class="col-md-6">
+                                            <p style="text-align:center;" id="errorM" class="alert-danger"></p>
                                             <fieldset>
                                                 <div class="form-group">
                                                     <div class="tg-select">
                                                         <select name="referee" style="height:35px;">
 															<option value="">Select Referee*</option>
-															<option value="Help">Discussion</option>
-															<option value="Help">Help</option>
-															<option value="Consutation">Consutation</option>
+															@foreach ($referees as $referee)
+                                                               <option>{{$referee->fullname}}</option>
+                                                            @endforeach
 														</select>
                                                     </div>
                                                 </div>
@@ -105,18 +108,18 @@
                                                     <div class="tg-select" style="height:35px;">
                                                         <select name="field" style="height:35px;">
 															<option value="">Select Field of Play*</option>
-															<option value="Help">Discussion</option>
-															<option value="Help">Help</option>
-															<option value="Consutation">Consutation</option>
+															@foreach ($venues as $venue)
+                                                              <option value="{{$venue->id}}">{{$venue->name}}</option>
+                                                             @endforeach
 														</select>
                                                     </div>
                                                 </div>
-
+                                                <p style="text-align:center;" id="errorT" class="alert-danger"></p>
                                                 <div class="form-group">
-                                                    <input type="datetime-local" title="Match Date" required="" value="2018-06-12T19:30" min="2020-06-07T00:00" max="2021-06-14T00:00" class="form-control" style="height:35px;" name="match-date">
+                                                    <input type="datetime-local" id="matchDate" title="Match Date" required=""  min="2020-06-07T00:00" max="2021-06-14T00:00" class="form-control" style="height:35px;" name="match_date">
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" style="width: 100%;" class="tg-btn submit-now">send</button>
+                                                    <button type="submit" id="btnSubmit" style="width: 100%; height:40px;" class="tg-btn submit">send</button>
                                                 </div>
                                             </fieldset>
                                         </div>
