@@ -274,8 +274,8 @@
                 <figure>
                     <img src="{{ asset('images/bg-video.jpg') }}" alt="image description">
                     <figcaption>
-                        <a class="tg-playbtn" href="https://youtu.be/iC9CpnSj-MU?iframe=true" data-rel="prettyPhoto[iframe]"></a>
-                        <h2>accusantium doloremque lauda totam rem aperiam ipsa</h2>
+                        <p class="tg-playbtn"></p>
+                        <h2>Best Fooball skills, to keep you and your family entertained</h2>
                     </figcaption>
                 </figure>
             </section>

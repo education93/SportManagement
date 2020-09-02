@@ -145,7 +145,7 @@ button {
     border: none;
 }
 
-extarea,
+textarea,
 select,
 .tg-select select,
 .form-control,
@@ -166,7 +166,7 @@ input[type="color"],
 .uneditable-input {
     outline: none;
     color: #666;
-    height: 4px;
+    height: 40px;
     background: #fff;
     font-size: 14px;
     line-height: 20px;
@@ -1462,7 +1462,7 @@ address {
 }
 
 .tg-modalbox.fade .modal-dialog {
-    width: 770px;
+    width: 50%;
     top: 10%;
     left: 50%;
     overflow: hidden;
@@ -1489,7 +1489,7 @@ address {
 
 .tg-logintype,
 .tg-modal-content .tg-formarea {
-    width: 60%;
+    width: 100%;
     float: left;
     padding: 27px 30px 30px;
 }

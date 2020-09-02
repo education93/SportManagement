@@ -50,7 +50,106 @@
     </div>
     <!--************************************
 			Search End
-	*************************************-->
+    *************************************-->
+    {{-- Add League Start --}}
+<div class="tg-modalbox modal fade" id="add-league" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="tg-modal-content">
+            <div class="tg-formarea">  
+                <div class="tg-border-heading">
+                    <div class="tg-section-heading">
+                        <h4>Add League</h4>
+                    </div>
+                </div>
+                <form class="tg-loginform" method="post">
+                    @csrf
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="Lname" class="form-control" placeholder="League Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="Lno_teams" class="form-control" placeholder="Number of teams">
+                        </div>
+                        <div class="form-group">
+                            <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add League</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- add league End --}}
+{{-- Add Referee --}}
+<div class="tg-modalbox modal fade" id="add-referee" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="tg-modal-content">
+            <div class="tg-formarea">  
+                <div class="tg-border-heading">
+                    <div class="tg-section-heading">
+                        <h4>Add Referee</h4>
+                    </div>
+                </div>
+                <form class="tg-loginform" method="post">
+                    @csrf
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="Rname" class="form-control" placeholder="Referee Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="Remail" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Rhometown" class="form-control" placeholder="Home Town">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Rprovince" class="form-control" placeholder="Province">
+                        </div>
+                        <div class="form-group">
+                            <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add Referee</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- add Referee --}}
+{{-- Add  Venues --}}
+<div class="tg-modalbox modal fade" id="add-venues" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="tg-modal-content">
+            <div class="tg-formarea">  
+                <div class="tg-border-heading">
+                    <div class="tg-section-heading">
+                        <h4>Add Venue</h4>
+                    </div>
+                </div>
+                <form class="tg-loginform" method="post">
+                    @csrf
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="Vname" class="form-control" placeholder="Venue Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Vprovince" class="form-control" placeholder="Province">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Vcity" class="form-control" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="Vcapacity" class="form-control" placeholder="Capacity">
+                        </div>
+                        <div class="form-group">
+                            <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add Venue</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- add venues --}}
     <!--************************************
 		LightBoxes Start
 	*************************************-->
@@ -59,7 +158,9 @@
             <div class="tg-modal-content">
                 <div class="tg-formarea">
                     <div class="tg-border-heading">
-                        <h3>Login</h3>
+                        <div class="tg-section-heading">
+                            <h4>Login</h4>
+                        </div>
                     </div>
                     <form class="tg-loginform" method="post">
                         <fieldset>
@@ -88,17 +189,7 @@
                         </fieldset>
                     </form>
                 </div>
-                <div class="tg-logintype">
-                    <div class="tg-border-heading">
-                        <h3>Login with</h3>
-                    </div>
-                    <ul>
-                        <li class="tg-facebook"><a href="#">facebook</a></li>
-                        <li class="tg-twitter"><a href="#">twitter</a></li>
-                        <li class="tg-googleplus"><a href="#">google+</a></li>
-                        <li class="tg-linkedin"><a href="#">linkedin</a></li>
-                    </ul>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -132,17 +223,7 @@
                         </fieldset>
                     </form>
                 </div>
-                <div class="tg-logintype">
-                    <div class="tg-border-heading">
-                        <h3>Signup with</h3>
-                    </div>
-                    <ul>
-                        <li class="tg-facebook"><a href="#">facebook</a></li>
-                        <li class="tg-twitter"><a href="#">twitter</a></li>
-                        <li class="tg-googleplus"><a href="#">google+</a></li>
-                        <li class="tg-linkedin"><a href="#">linkedin</a></li>
-                    </ul>
-                </div>
+               
             </div>
         </div>
     </div>

@@ -96,11 +96,12 @@
                     <li>
                         <a href="#"><i class=" fa fa-navicon"></i></a>
                         <ul>
-                            <li><a href="#">League</a></li>
-                            <li><a href="#">Venue</a></li>
-                            <li><a href="#">Referee</a></li>
-                            <li><a href="#">Fixture</a></li>
-                            <li><a href="#">Players</a></li>
+                            <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
+                            <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
+                            <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
+                            <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
+                            <li><a href="{{ url('/Players/create')}}">Add Player</a></li>
+                            <li><a href="{{ url('/teams/create')}}">Add Teams</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -250,11 +251,12 @@
                                         <li>
                                             <a href="#"><i class=" fa fa-navicon"></i></a>
                                             <ul>
-                                                <li><a href="#">League</a></li>
-                                                <li><a href="#">Venue</a></li>
-                                                <li><a href="#">Referee</a></li>
-                                                <li><a href="#">Fixture</a></li>
-                                                <li><a href="#">Players</a></li>
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
+                                                <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
+                                                <li><a href="{{ url('/Players/create')}}">Add Player</a></li>
+                                                <li><a href="{{ url('/teams/create')}}">Add Teams</a></li>
                                             </ul>
                                         </li>
                                     </ul>
