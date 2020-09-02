@@ -60,8 +60,9 @@
                     <div class="tg-section-heading">
                         <h4>Add League</h4>
                     </div>
+                    @include('layouts.messages')
                 </div>
-                <form class="tg-loginform" method="post">
+                <form class="tg-loginform" method="post" action="/league/create/store">
                     @csrf
                     <fieldset>
                         <div class="form-group">
@@ -89,8 +90,9 @@
                     <div class="tg-section-heading">
                         <h4>Add Referee</h4>
                     </div>
+                    @include('layouts.messages')
                 </div>
-                <form class="tg-loginform" method="post">
+                <form class="tg-loginform" method="post" action="/referee/create/store">
                     @csrf
                     <fieldset>
                         <div class="form-group">
@@ -124,8 +126,9 @@
                     <div class="tg-section-heading">
                         <h4>Add Venue</h4>
                     </div>
+                    @include('layouts.messages')
                 </div>
-                <form class="tg-loginform" method="post">
+                <form class="tg-loginform" method="post" action="/add/venue">
                     @csrf
                     <fieldset>
                         <div class="form-group">

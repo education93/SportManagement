@@ -15,6 +15,8 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
@@ -48,6 +50,8 @@ return [
             'root' => storage_path('app'),
         ],
 
+        
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -77,6 +81,10 @@ return [
     | the locations of the links and the values should be their targets.
     |
     */
+    'uploads' => [
+        'driver' => 'local',
+        'root'   => public_path(), // previously storage_path();
+  ],
 
     'links' => [
         public_path('storage') => storage_path('app/public'),

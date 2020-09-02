@@ -255,7 +255,7 @@
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
                                                 <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
-                                                <li><a href="{{ url('/Players/create')}}">Add Player</a></li>
+                                                <li><a href="{{ url('/players/create')}}">Add Player</a></li>
                                                 <li><a href="{{ url('/teams/create')}}">Add Teams</a></li>
                                             </ul>
                                         </li>

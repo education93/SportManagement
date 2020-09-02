@@ -29,7 +29,8 @@
                             <div class="tg-slider-content">
                                 <h1>Best  <span>Football Skills</span></h1>
                                 <div class="tg-btnbox">
-                                    <h2>Gooooal</h2>
+                                    <h2>Gooooal @include('layouts.messages')</h2>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                             <div class="tg-slider-content">
                                 <h1 >Best  <span>Football Skills</span></h1>
                                 <div class="tg-btnbox">
-                                    <h2>Gooooal</h2>
+                                    <h2>Gooooal @include('layouts.messages')</h2>
                                 </div>
                             </div>
                         </div>

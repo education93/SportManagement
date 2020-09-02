@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Players;
 use App\Fixtures;
-use App\League;
+use App\Scores;
 use App\Venues;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class LeaguesController extends Controller
+
+class VenueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,29 +41,33 @@ class LeaguesController extends Controller
      */
     public function store(Request $request)
     {
-                //
-                $this->validate($request,['Lname'=>'required',
-                'Lno_teams'=>'required',
-                
-                
-                    ]);
+        //
+        //
+        $this->validate($request,['Vname'=>'required',
+        'Vprovince'=>'required',
+        'Vcity'=>'required',
+        'Vcapacity'=>'required',
         
-                    $post = new League;
-                    $post->league_name = $request->input('Lname');
-                    $post->no_of_teams= $request->input('Lno_teams');
-                    
-                    $name=  DB::table('league')
-                            ->select('*')
-                           ->where('league_name', $post->league_name)
-                            ->get();
-        
-                    // Camera
-                   if($name->isEmpty() ){
-                    $post->save();
-                    return redirect()->back()->with('success','League Added Successfully');
-                   }else{
-                    return redirect()->back()->with('error','League Already Exist');
-                   }
+            ]);
+
+            $post = new Venues;
+            $post->name = $request->input('Vname');
+            $post->province= $request->input('Vprovince');
+            $post->location = $request->input('Vcity');
+            $post->capacity =$request->input('Vcapacity');
+            
+            $name=  DB::table('venues')
+                    ->select('*')
+                   ->where('name', $post->name)
+                    ->get();
+
+            // Camera
+           if($name->isEmpty() ){
+            $post->save();
+            return redirect()->back()->with('success','Venue Added Successfully');
+           }else{
+            return redirect()->back()->with('error','Venue Already Exist');
+           }
     }
 
     /**
@@ -73,7 +78,7 @@ class LeaguesController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**

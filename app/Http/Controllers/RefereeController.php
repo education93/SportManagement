@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Players;
 use App\Fixtures;
-use App\League;
+use App\Referee;
 use App\Venues;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class LeaguesController extends Controller
+class RefereeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,29 +40,31 @@ class LeaguesController extends Controller
      */
     public function store(Request $request)
     {
-                //
-                $this->validate($request,['Lname'=>'required',
-                'Lno_teams'=>'required',
-                
-                
-                    ]);
-        
-                    $post = new League;
-                    $post->league_name = $request->input('Lname');
-                    $post->no_of_teams= $request->input('Lno_teams');
-                    
-                    $name=  DB::table('league')
-                            ->select('*')
-                           ->where('league_name', $post->league_name)
-                            ->get();
-        
-                    // Camera
-                   if($name->isEmpty() ){
-                    $post->save();
-                    return redirect()->back()->with('success','League Added Successfully');
-                   }else{
-                    return redirect()->back()->with('error','League Already Exist');
-                   }
+         //
+         $this->validate($request,['Rname'=>'required',
+         'Rprovince'=>'required',
+         'Rhometown'=>'required',
+         'Remail'=>'required',
+             ]);
+ 
+             $post = new Referee;
+             $post->fullname = $request->input('Rname');
+             $post->province= $request->input('Rprovince');
+             $post->HomeTown = $request->input('Rhometown');
+             $post->email =$request->input('Remail');
+             
+             $name=  DB::table('referee')
+                     ->select('*')
+                    ->where('fullname', $post->fullname)
+                     ->get();
+ 
+             // Camera
+            if($name->isEmpty() ){
+             $post->save();
+             return redirect()->back()->with('success','Referee Added Successfully');
+            }else{
+             return redirect()->back()->with('error','Referee Already Exist');
+            }
     }
 
     /**
@@ -73,7 +75,7 @@ class LeaguesController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**

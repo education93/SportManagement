@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Players;
+use App\Fixtures;
+use App\Scores;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class GoalController extends Controller
@@ -34,7 +39,20 @@ class GoalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                //
+                $this->validate($request,['team_name'=>'required',
+                'fixture_id'=>'required',
+                'player_id'=>'required',
+                    ]);
+        
+                    $post = new Scores;
+                    $post->team_name = $request->input('team_name');
+                    $post->province= $request->input('fixture_id');
+                    $post->location = $request->input('player_id');
+
+                    $post->save();
+                    return redirect()->back()->with('success','Goal Added Successfully');
+       
     }
 
     /**

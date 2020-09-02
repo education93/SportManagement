@@ -44,7 +44,7 @@
                                        @foreach ($teams as $team)
                                        <div class="swiper-slide">
                                         <figure class="tg-postimg">
-                                        <img src="{{ asset('images/teams') }}/{{$team->image}}.jpg" alt="image description"><br/><br/><br/><br/>
+                                        <img src="/storage/images/teams/{{$team->image}}" alt="image description"><br/><br/><br/><br/>
                                             <!--<div class="tg-img-hover">-->
                                             <figcaption class="tg-img-hover">
                                                 <h2 href="#" class="tg-theme-tag">{{$team->couch}}</h2>
