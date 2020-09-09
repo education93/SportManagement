@@ -11,6 +11,7 @@ use App\Database;
 use App\Teams;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FixtureController extends Controller
 {
@@ -133,7 +134,11 @@ class FixtureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fixtures = Fixtures::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-fixture')->with(['fixtures'=>$fixtures,'league_name'=>$leage,'league'=>$league]);
+    
     }
 
     /**
@@ -145,7 +150,63 @@ class FixtureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,['away_team'=>'required',
+        'home_team'=>'required',
+        'referee'=>'required',
+        'field'=>'required',
+        'match_date'=>'required',
+        
+            ]);
+
+            $post = new Fixtures;
+            $post->team_1_name = $request->input('home_team');
+            $post->team_2_name= $request->input('away_team');
+            $post->match_date = $request->input('match_date');
+            $post->venue_id =$request->input('field');
+            $post->referee =$request->input('referee');
+
+                    $m_time =$post->match_date;
+                    $venue_id = $post->venue_id;
+                    $ref_id = $post->referee;
+
+                    $t = strtotime($m_time);
+                    $t2 = strtotime($m_time) + 60*60*2; //  + 2 hours
+                    $t3 = strtotime($m_time) - 60*60*2; //  + 2 hours
+                    $start = date('y-m-d H:i:s', $t);
+                    $end = date('y-m-d H:i:s', $t2);
+                    $end2 = date('y-m-d H:i:s', $t3);
+
+                     $match1=  DB::table('fixtures')
+                    ->select('*')
+                   ->whereBetween('match_date', [$start, $end])
+                   ->where(['venue_id'=>$venue_id])
+                    ->get();
+                    $match2=  DB::table('fixtures')
+                    ->select('*')
+                   ->whereBetween('match_date', [$end2, $start])
+                   ->where(['venue_id'=>$venue_id])
+                    ->get();
+
+                    $ref1=  DB::table('fixtures')
+                    ->select('*')
+                   ->whereBetween('match_date', [$start, $end])
+                   ->where(['referee'=>$ref_id])
+                    ->get();
+                    $ref2=  DB::table('fixtures')
+                    ->select('*')
+                   ->whereBetween('match_date', [$end2, $start])
+                   ->where(['referee'=>$ref_id])
+                    ->get();
+
+                // return $match1. "<br/><br/>".$match2;
+           if($match1->isEmpty() && $match2->isEmpty() && $ref1->isEmpty() && $ref2->isEmpty() ){
+            $post->save();
+            return redirect()->back()->with('success','Fixture edited Successfully');
+           }else{
+            return redirect()->back()->with('error','Referee or Venue Occupied For this Time Please Verify');
+           }
+               
+    
     }
 
     /**
@@ -156,6 +217,10 @@ class FixtureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Fixtures::find($id);
+        $post->delete();
+
+        return redirect('/leagueadmin')->with('success','Fixture Deleted Successfully');
+    
     }
 }

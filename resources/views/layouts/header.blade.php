@@ -127,14 +127,27 @@
                                 <div id="tg-addnavigationm-mobile" class="tg-addnavigationm-mobile collapse navbar-collapse">
                                     <div class="tg-colhalf pull-right">
                                         <nav class="tg-addnav">
-                                            <ul>
+                                            <ul>@if (Auth::check())
+                                                <li><a href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                  document.getElementById('logout-form').submit();">
+                                                     {{ __('Logout') }}
+                                                 </a>
+                 
+                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                     @csrf
+                                                 </form></li>
+                                                 <li><a href="#" > {{ Auth::user()->name }}</a></li>
+                                                @else
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#tg-login">login</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#tg-register">Register</a></li>
+                                                @endif
+                                                
                                                 <li>
                                                     <div class="tg-cart">
-                                                        <a href="javascript:void(0)" class="dropdown-toggle" id="tg-cartdropdown" data-toggle="dropdown">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </a>
+                                                        {{-- <a href="javascript:void(0)" class="dropdown-toggle" id="tg-cartdropdown" data-toggle="dropdown">
+                                                            {{-- <i class="fa fa-shopping-cart"></i> 
+                                                        </a> --}}
                                                         <div class="tg-cartcontent dropdown-menu" aria-labelledby="tg-cartdropdown">
                                                             <ul>
                                                                 <li>
@@ -184,7 +197,7 @@
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <a id="tg-btn-search" href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                                                    {{-- <a id="tg-btn-search" href="javascript:void(0)"><i class="fa fa-search"></i></a> --}}
                                                 </li>
                                             </ul>
                                         </nav>
@@ -217,7 +230,7 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-                                        <li><a href="buyticket">Buy Tickets</a></li>
+                                        <li><a href="#">Buy Tickets</a></li>
                                         <li>
                                             <a href="#">Match Results</a>
                                             <ul class="tg-dropdown-menu">
@@ -250,13 +263,16 @@
                                         
                                         <li>
                                             <a href="#"><i class=" fa fa-navicon"></i></a>
-                                            <ul>
+                                            <ul>@if (Auth::user()->user_type=="admin")
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
                                                 <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
+                                                @else
                                                 <li><a href="{{ url('/players/create')}}">Add Player</a></li>
-                                                <li><a href="{{ url('/teams/create')}}">Add Teams</a></li>
+                                                <li><a href="{{ url('/teams/create')}}">Add Team</a></li>
+                                                <li><a href="{{ url('/teams/create')}}">Admin</a></li>
+                                                @endif
                                             </ul>
                                         </li>
                                     </ul>

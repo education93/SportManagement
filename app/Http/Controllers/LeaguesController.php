@@ -84,7 +84,10 @@ class LeaguesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $leagues = League::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-fixture')->with(['leagues'=>$leagues,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -96,7 +99,28 @@ class LeaguesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,['Lname'=>'required',
+        'Lno_teams'=>'required',
+        
+        
+            ]);
+
+            $post = new League;
+            $post->league_name = $request->input('Lname');
+            $post->no_of_teams= $request->input('Lno_teams');
+            
+            $name=  DB::table('league')
+                    ->select('*')
+                   ->where('league_name', $post->league_name)
+                    ->get();
+
+            // Camera
+           if($name->isEmpty() ){
+            $post->save();
+            return redirect()->back()->with('success','League  Succeditedessfully');
+           }else{
+            return redirect()->back()->with('error','League Already Exist');
+           }
     }
 
     /**
@@ -107,6 +131,9 @@ class LeaguesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = League::find($id);
+        $post->delete();
+
+        return redirect()->back()->with('success','Fixture Successfully');
     }
 }

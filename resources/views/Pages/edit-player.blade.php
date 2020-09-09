@@ -39,7 +39,7 @@
             <section class="tg-main-section tg-paddingbottom-zero tg-haslayout">
                 <div class="container">
                     <div class="tg-section-name">
-                        <h2>Add Players</h2>
+                        <h2>edit Players</h2>
                     </div>
                     <div class="col-sm-11 col-xs-11 pull-right">
                         <div class="row">

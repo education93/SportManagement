@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Players;
 use App\Fixtures;
+use App\League;
 use App\Referee;
 use App\Venues;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +87,10 @@ class RefereeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $referees = Referee::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-fixture')->with(['referees'=>$referees,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -99,6 +103,24 @@ class RefereeController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $this->validate($request,['Rname'=>'required',
+         'Rprovince'=>'required',
+         'Rhometown'=>'required',
+         'Remail'=>'required',
+             ]);
+ 
+             $post = new Referee;
+             $post->fullname = $request->input('Rname');
+             $post->province= $request->input('Rprovince');
+             $post->HomeTown = $request->input('Rhometown');
+             $post->email =$request->input('Remail');
+             
+ 
+        
+             $post->save();
+             return redirect()->back()->with('success','Referee Edited Successfully');
+            
     }
 
     /**
@@ -109,6 +131,9 @@ class RefereeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Referee::find($id);
+        $post->delete();
+
+        return redirect('/leagueadmin')->with('success','Referee Deleted Successfully');
     }
 }

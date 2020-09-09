@@ -66,10 +66,10 @@
                     @csrf
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="Lname" class="form-control" placeholder="League Name">
+                            <input type="text" name="Lname" value="{{ old('Lname') }}" class="form-control" placeholder="League Name">
                         </div>
                         <div class="form-group">
-                            <input type="number" name="Lno_teams" class="form-control" placeholder="Number of teams">
+                            <input type="number" name="Lno_teams" value="{{ old('Lno_teams') }}" class="form-control" placeholder="Number of teams">
                         </div>
                         <div class="form-group">
                             <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add League</button>
@@ -96,16 +96,16 @@
                     @csrf
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="Rname" class="form-control" placeholder="Referee Name">
+                            <input type="text" name="Rname" value="{{ old('Rname') }}" class="form-control" placeholder="Referee Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="Remail" class="form-control" placeholder="Email">
+                            <input type="email" name="Remail" value="{{ old('Remail') }}" class="form-control" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="Rhometown" class="form-control" placeholder="Home Town">
+                            <input type="text" name="Rhometown" value="{{ old('Rhometown') }}" class="form-control" placeholder="Home Town">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="Rprovince" class="form-control" placeholder="Province">
+                            <input type="text" name="Rprovince" value="{{ old('Rprovince') }}" class="form-control" placeholder="Province">
                         </div>
                         <div class="form-group">
                             <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add Referee</button>
@@ -132,16 +132,16 @@
                     @csrf
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="Vname" class="form-control" placeholder="Venue Name">
+                            <input type="text" name="Vname" value="{{ old('Vname') }}" class="form-control" placeholder="Venue Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="Vprovince" class="form-control" placeholder="Province">
+                            <input type="text" name="Vprovince" value="{{ old('Vprovince') }}" class="form-control" placeholder="Province">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="Vcity" class="form-control" placeholder="City">
+                            <input type="text" name="Vcity" value="{{ old('Vcity') }}" class="form-control" placeholder="City">
                         </div>
                         <div class="form-group">
-                            <input type="number" name="Vcapacity" class="form-control" placeholder="Capacity">
+                            <input type="number" name="Vcapacity" value="{{ old('Vcapacity') }}" class="form-control" placeholder="Capacity">
                         </div>
                         <div class="form-group">
                             <button class="tg-btn tg-btn-lg" style="width:100%" type="submit">Add Venue</button>
@@ -165,13 +165,25 @@
                             <h4>Login</h4>
                         </div>
                     </div>
-                    <form class="tg-loginform" method="post">
+                   
+                        <form class="tg-loginform" method="POST" action="{{ route('login') }}">
+                            @csrf
                         <fieldset>
                             <div class="form-group">
-                                <input type="text" name="userName/email" class="form-control" placeholder="username/email">
+                                <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" class="form-control" placeholder="password">
+                                <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>
@@ -203,22 +215,53 @@
                     <div class="tg-border-heading">
                         <h3>Signup</h3>
                     </div>
-                    <form class="tg-loginform" method="post">
+                    <form class="tg-loginform" method="POST" action="{{ route('register') }}">
+                        @csrf
                         <fieldset>
                             <div class="form-group">
-                                <input type="text" name="userName" class="form-control" placeholder="username">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Full Names">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="email">
+                                <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <div class="tg-note">
-                                    <i class="fa fa-exclamation-circle"></i>
-                                    <span>We will email you your password.</span>
+                                <div class="tg-select">
+                                    <select id="homeTeam" name="league" style="height:35px;">
+                                        <option value="">Select League*</option>
+                                        @foreach ($league as $league)
+                                            <option>{{$league->league_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                @error('league')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                             <div class="form-group">
-                                <button class="tg-btn tg-btn-lg" type="submit">Login Now</button>
+                                <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input id="password-confirm" placeholder="Repeat Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                            <div class="form-group">
+                                <button class="tg-btn tg-btn-lg" style="width: 100%; height:40px;" type="submit">Register Now</button>
                             </div>
                             <div class="tg-description">
                                 <p>Already have an account? <a href="#">Login</a></p>

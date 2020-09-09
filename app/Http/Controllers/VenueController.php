@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Players;
 use App\Fixtures;
-use App\Scores;
+use App\League;
 use App\Venues;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +90,10 @@ class VenueController extends Controller
     public function edit($id)
     {
         //
+        $venues = Venues::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-fixture')->with(['venues'=>$venues,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -102,6 +106,23 @@ class VenueController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,['Vname'=>'required',
+        'Vprovince'=>'required',
+        'Vcity'=>'required',
+        'Vcapacity'=>'required',
+        
+            ]);
+
+            $post = new Venues;
+            $post->name = $request->input('Vname');
+            $post->province= $request->input('Vprovince');
+            $post->location = $request->input('Vcity');
+            $post->capacity =$request->input('Vcapacity');
+            
+          
+            $post->save();
+            return redirect()->back()->with('success','Venue Edited Successfully');
+           
     }
 
     /**
@@ -112,6 +133,9 @@ class VenueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Venues::find($id);
+        $post->delete();
+
+        return redirect('/leagueadmin')->with('success','Venue Deleted Successfully');
     }
 }

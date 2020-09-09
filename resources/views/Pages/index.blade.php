@@ -128,7 +128,7 @@
                                                         <div class="tg-match">
                                                             <div class="tg-box">
                                                                 <strong class="tg-teamlogo">
-																	<img src="{{ asset('images/logo')}}/{{$results->team_1}}.png" alt="image description">
+																	<img src="{{ asset('/storage/images/logo')}}/{{$results->team_1}}.png" alt="image description">
 																</strong>
                                                                 
                                                             </div>
@@ -137,7 +137,7 @@
                                                             </div>
                                                             <div class="tg-box">
                                                                 <strong class="tg-teamlogo">
-																	<img src="{{ asset('images/logo')}}/{{$results->team_2}}.png" alt="image description">
+																	<img src="{{ asset('/storage/images/logo')}}/{{$results->team_2}}.png" alt="image description">
 																</strong>
                                                                 
                                                             </div>
@@ -225,7 +225,7 @@
 														<div class="tg-matchdetail">
 															<div class="tg-box">
 																<strong class="tg-teamlogo">
-																	<img src="{{ asset('images/logo') }}/{{$fixture->team_1_name}}.png" alt="Team_1_image">
+																	<img src="{{ asset('/storage/images/logo') }}/{{$fixture->team_1_name}}.png" alt="Team_1_image">
 																</strong>
 															<h4>{{$fixture->team_1_name}}</h4>
 															</div>
@@ -234,7 +234,7 @@
 															</div>
 															<div class="tg-box">
 																<strong class="tg-teamlogo">
-																	<img src="{{ asset('images/logo') }}/{{$fixture->team_2_name}}.png" alt="Team_2_image">
+																	<img src="{{ asset('/storage/images/logo') }}/{{$fixture->team_2_name}}.png" alt="Team_2_image">
 																</strong>
 																<h4>{{$fixture->team_2_name}}</h4>
 															</div>

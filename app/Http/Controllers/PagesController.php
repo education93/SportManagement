@@ -13,6 +13,8 @@ use App\Log;
 use App\Teams;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -118,6 +120,18 @@ class PagesController extends Controller
             // end Results
     }
 
+    public function admin()
+    {
+       
+    
+       
+        $leage = Auth::user()->league;
+    
+        $league = League::all();
+
+        return view('Pages.admin')->with(['league'=>$league,'league_name'=>$leage,]);
+            // end Results
+    }
     /**
      * Show the form for creating a new resource.
      *

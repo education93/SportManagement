@@ -17,7 +17,7 @@
                 </div>
                 <ol class="tg-breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Match Result</li>
+                    <li class="active">Table</li>
                 </ol>
             </div>
         </div>

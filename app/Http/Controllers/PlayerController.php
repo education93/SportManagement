@@ -72,7 +72,7 @@ class PlayerController extends Controller
             $post->full_name = $request->input('fullname');
             $post->jersey_no = $request->input('Jerseyno');
             $post->player_team = "Orlando Pirates"; //Auth::user()->team_name;
-            $post->league_name =  "League 1"; //Auth::user()->league_name;
+            $post->league_name =  Auth::user()->league;
             $post->age = $request->input('age');
             $post->province_of_birth = $request->input('province');
             $post->country_of_birth = $request->input('country');
@@ -116,7 +116,10 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $players = Players::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-fixture')->with(['players'=>$players,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -128,7 +131,58 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,['fullname'=>'required',
+        'Jerseyno'=>'required',
+        'age'=>'required',
+        'province'=>'required',
+        'town'=>'required',
+        'country'=>'required',
+        'player_image'=>'image|nullable|max:1999',
+            ]);
+
+             // handle file upload
+        if($request->hasFile('player_image')){
+            // get file with extention
+            $filenamewithExt=$request->file('player_image')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            //get just extention
+            $extention = $request->file('player_image')->getClientOriginalExtension();
+            //file name to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extention;
+            //upload image
+            $request->file('player_image')->storeAs('public/images/player',$fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+
+            $post = new Players;
+            $post->full_name = $request->input('fullname');
+            $post->jersey_no = $request->input('Jerseyno');
+            $post->player_team = "Orlando Pirates"; //Auth::user()->team_name;
+            $post->league_name =  Auth::user()->league;
+            $post->age = $request->input('age');
+            $post->province_of_birth = $request->input('province');
+            $post->country_of_birth = $request->input('country');
+            $post->home_town = $request->input('town');
+            $post->player_image = $fileNameToStore;
+
+                    $team ="Orlando Pirates"; //Auth::user()->team_name;
+                    $fullname = $request->input('fullname');
+
+                     $match1=  DB::table('players')
+                    ->select('*')
+                   ->where(['player_team'=>$team,'full_name'=>$fullname])
+                    ->get();
+
+           if($match1->isEmpty()){
+            $post->save();
+            return redirect()->back()->with('success','Player Edited Successfully');
+           }else{
+            return redirect()->back()->with('error','Player Already Exist');
+           }
+               
     }
 
     /**
@@ -139,6 +193,15 @@ class PlayerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Players::find($id);
+        $post->delete();
+
+        if ($post->image != 'noimage.jpg'){
+            // delete image
+            Storage::delete('public/images/players'.$post->image);
+        }
+
+        return redirect()->back()->with('success','Player Deleted Successfully');
+    
     }
 }

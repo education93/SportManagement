@@ -166,6 +166,83 @@ class TeamController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,['name'=>'required',
+        'phone'=>'required',
+        'email'=>'required',
+        'manager'=>'required',
+        'couch'=>'required',
+        'about'=>'required',
+        'logo'=>'image|nullable|max:1999',
+        'home_kit'=>'image|nullable|max:1999',
+        'away_kit'=>'image|nullable|max:1999',
+            ]);
+
+             // handle file upload
+        if($request->hasFile('logo')){
+            // get file with extention
+            $filenamewithExt=$request->file('logo')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            //get just extention
+            $extention = $request->file('logo')->getClientOriginalExtension();
+            //file name to store
+            $logo = $filename.'_'.time().'.'.$extention;
+            //upload image
+            $request->file('logo')->storeAs('public/images/teams',$logo);
+        }else{
+            $logo = 'noimage.jpg';
+        }
+
+         // handle file upload
+         if($request->hasFile('home_kit')){
+            // get file with extention
+            $filenamewithExt=$request->file('home_kit')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            //get just extention
+            $extention = $request->file('home_kit')->getClientOriginalExtension();
+            //file name to store
+            $homekit = $filename.'_'.time().'.'.$extention;
+            //upload image
+            $request->file('home_kit')->storeAs('public/images/teams',$homekit);
+        }else{
+            $homekit = 'noimage.jpg';
+        }
+
+         // handle file upload
+         if($request->hasFile('away_kit')){
+            // get file with extention
+            $filenamewithExt=$request->file('away_kit')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            //get just extention
+            $extention = $request->file('away_kit')->getClientOriginalExtension();
+            //file name to store
+            $awaykit = $filename.'_'.time().'.'.$extention;
+            //upload image
+            $request->file('away_kit')->storeAs('public/images/teams',$awaykit);
+        }else{
+            $homekit = 'noimage.jpg';
+        }
+
+
+            $post = new Teams;
+            $league = "League 1";
+            $post->league_name = $league;
+            $post->name = $request->input('name');
+            $post->phone = $request->input('phone');
+            $post->email = $request->input('email');
+            $post->address = $request->input('address');
+            $post->couch = $request->input('couch');
+            $post->manager = $request->input('manager');
+            $post->home_kit = $homekit;
+            $post->away_kit = $awaykit;
+            $post->image = $logo;
+           
+
+            $post->save();
+            return redirect('/teams/create')->with('success','Team Added Successfully');
+
     }
 
     /**
