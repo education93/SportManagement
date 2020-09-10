@@ -95,13 +95,18 @@
                     </li>
                     <li>
                         <a href="#"><i class=" fa fa-navicon"></i></a>
-                        <ul>
+                        <ul>@if (Auth::check())
+                            @if (Auth::user()->user_type==="admin")
                             <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
                             <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
                             <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
                             <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
-                            <li><a href="{{ url('/Players/create')}}">Add Player</a></li>
-                            <li><a href="{{ url('/teams/create')}}">Add Teams</a></li>
+                            @else
+                            <li><a href="{{ url('/players/create')}}">Add Player</a></li>
+                            <li><a href="{{ url('/teams/create')}}">Add Team</a></li>
+                            <li><a href="{{ url('/teams/create')}}">Admin</a></li>
+                            @endif
+                            @endif
                         </ul>
                     </li>
                 </ul>
@@ -263,15 +268,17 @@
                                         
                                         <li>
                                             <a href="#"><i class=" fa fa-navicon"></i></a>
-                                            <ul>@if (Auth::user()->user_type=="admin")
+                                            <ul>@if (Auth::check())
+                                                @if (Auth::user()->user_type=="admin")
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
                                                 <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
                                                 <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
                                                 @else
-                                                <li><a href="{{ url('/players/create')}}">Add Player</a></li>
+                                                
                                                 <li><a href="{{ url('/teams/create')}}">Add Team</a></li>
-                                                <li><a href="{{ url('/teams/create')}}">Admin</a></li>
+                                               {!! Score::not_registered_yet(Auth::user()->id) !!}
+                                                @endif
                                                 @endif
                                             </ul>
                                         </li>

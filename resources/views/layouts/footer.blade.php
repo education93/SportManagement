@@ -237,7 +237,7 @@
                             <div class="form-group">
                                 <div class="tg-select">
                                     <select id="homeTeam" name="league" style="height:35px;">
-                                        <option value="">Select League*</option>
+                                        <option >Select League*</option>
                                         @foreach ($league as $league)
                                             <option>{{$league->league_name}}</option>
                                         @endforeach

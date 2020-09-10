@@ -9,6 +9,7 @@ use App\Database;
 use App\League;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -103,17 +104,19 @@ class TeamController extends Controller
 
 
             $post = new Teams;
-            $league = "League 1";
+            $league = Auth::user()->league;
             $post->league_name = $league;
             $post->name = $request->input('name');
             $post->phone = $request->input('phone');
             $post->email = $request->input('email');
             $post->address = $request->input('address');
             $post->couch = $request->input('couch');
+            $post->about = $request->input('about');
             $post->manager = $request->input('manager');
             $post->home_kit = $homekit;
             $post->away_kit = $awaykit;
             $post->image = $logo;
+            $post->owner_id = Auth::user()->id;
            
 
 
@@ -227,17 +230,19 @@ class TeamController extends Controller
 
 
             $post = new Teams;
-            $league = "League 1";
+            $league = Auth::user()->league;
             $post->league_name = $league;
             $post->name = $request->input('name');
             $post->phone = $request->input('phone');
             $post->email = $request->input('email');
             $post->address = $request->input('address');
             $post->couch = $request->input('couch');
+            $post->about = $request->input('about');
             $post->manager = $request->input('manager');
             $post->home_kit = $homekit;
             $post->away_kit = $awaykit;
             $post->image = $logo;
+            $post->owner_id = Auth::user()->id;
            
 
             $post->save();

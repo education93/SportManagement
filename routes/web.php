@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Http\Controllers\PlayerController;
+use App\Players;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -28,6 +29,7 @@ Route::resource('teams', 'TeamController');
 
 Route::post('/add/player/team', 'PlayerController@store');
 Route::resource('players', 'PlayerController');
+Route::get('player/{id}/edit-player','PlayerController@edit');
 
 Route::resource('goals', 'GoalController');
 

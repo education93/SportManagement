@@ -5,6 +5,7 @@ use App\Http\Controllers\Throwable;
 use App\Http\Controllers\CustomException;
 use App\Players;
 use App\League;
+use App\Teams;
 use App\Database;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -116,10 +117,10 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
-        $players = Players::find($id);
+        $player = Players::find($id);
         $league = League::all();
         $leage = Auth::user()->league;
-        return view('edit.edit-fixture')->with(['players'=>$players,'league_name'=>$leage,'league'=>$league]);
+        return view('pages.edit-player')->with(['player'=>$player,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -160,7 +161,12 @@ class PlayerController extends Controller
             $post = new Players;
             $post->full_name = $request->input('fullname');
             $post->jersey_no = $request->input('Jerseyno');
-            $post->player_team = "Orlando Pirates"; //Auth::user()->team_name;
+            $id = Auth::user()->id;
+            $team = Teams::where('owner_id',$id)->first();
+            $team_name =DB::select("SELECT name FROM teams WHERE owner_id = '$id'");
+            foreach ($team_name as $name) {
+                $post->player_team = $name->name;
+            }
             $post->league_name =  Auth::user()->league;
             $post->age = $request->input('age');
             $post->province_of_birth = $request->input('province');
@@ -168,7 +174,9 @@ class PlayerController extends Controller
             $post->home_town = $request->input('town');
             $post->player_image = $fileNameToStore;
 
-                    $team ="Orlando Pirates"; //Auth::user()->team_name;
+                    foreach ($team_name as $name) {
+                        $team= $name->name;
+                    }
                     $fullname = $request->input('fullname');
 
                      $match1=  DB::table('players')

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Scores;
 use App\Players;
 use App\Results;
+use App\Teams;
 
 class Score
 {
@@ -57,6 +58,17 @@ class Score
     
     }
 
-
+    public static function not_registered_yet($id){
+        $results = Teams::select('name')
+        ->where('owner_id', '=', $id)
+    ->get();
+        foreach ($results as $result) {
+            if ($result->name=="") {
+                echo "";
+            } else {
+                echo "<li><a href='/players/create'>Add Player</a></li><li><a href='/admin'>Admin</a></li>";
+            }
+        }
+    }
    
 }

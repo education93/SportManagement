@@ -23,6 +23,12 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    // public function __construct(){
+    //     $this->middleware('auth',['/','index']);
+    // }
+
     public function index()
     {
         $leage ="League 1";
@@ -126,10 +132,15 @@ class PagesController extends Controller
     
        
         $leage = Auth::user()->league;
-    
         $league = League::all();
-
-        return view('Pages.admin')->with(['league'=>$league,'league_name'=>$leage,]);
+        $id = Auth::user()->id;
+        $team = Teams::where('owner_id',$id)->first();
+        $team_name =DB::select("SELECT name FROM teams WHERE owner_id = '$id'");
+        foreach ($team_name as $name) {
+            $players = DB::select("SELECT * FROM players WHERE player_team = '$name->name'");
+        }
+       
+        return view('Pages.admin')->with(['team'=>$team,'league'=>$league,'league_name'=>$leage,'players'=>$players]);
             // end Results
     }
     /**

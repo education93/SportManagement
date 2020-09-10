@@ -54,35 +54,38 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-12 col-xs-12">
-                                        <form action="/add/player/team" method="post" class="tg-commentform help-form" id="tg-commentform" enctype="multipart/form-data">
+                                        {{-- <form action="/add/player/team" method="post" class="tg-commentform help-form" id="tg-commentform" enctype="multipart/form-data"> --}}
+                                            {!! Form::open(['action'=>['PlayerController@update',$player->id],'method'=>'POST','class'=>'tg-commentform help-form','id'=>'tg-commentform','enctype'=>'multipart/form-data']) !!}
                                             @csrf
                                             <fieldset>
                                                 @include('layouts.messages')
                                                 <div class="form-group">
-                                                    <input type="text" required="" placeholder="Full Name*" class="form-control" style="height:35px;" name="fullname" value="{{ old('fullname') }}">
+                                                    <input type="text" required="" placeholder="Full Name*" class="form-control" style="height:35px;" name="fullname" value="{{ $player->full_name }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="number" required="" placeholder="Jersey No*" class="form-control" style="height:35px;" name="Jerseyno" value="{{ old('Jerseyno') }}">
+                                                    <input type="number" required="" placeholder="Jersey No*" class="form-control" style="height:35px;" name="Jerseyno" value="{{ $player->jersey_no }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="number" required="" placeholder="Age*" class="form-control" style="height:35px;" name="age" value="{{ old('age') }}">
+                                                    <input type="number" required="" placeholder="Age*" class="form-control" style="height:35px;" name="age" value="{{ $player->age }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" required="" placeholder="Province of Birth*" class="form-control" style="height:35px;" name="province" value="{{ old('province') }}">
+                                                    <input type="text" required="" placeholder="Province of Birth*" class="form-control" style="height:35px;" name="province" value="{{ $player->province_of_birth }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" required="" placeholder="Home Town*" class="form-control" style="height:35px;" name="town" value="{{ old('town') }}">
+                                                    <input type="text" required="" placeholder="Home Town*" class="form-control" style="height:35px;" name="town" value="{{ $player->home_town }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" required="" placeholder="Country of Birth*" class="form-control" style="height:35px;" name="country" value="{{ old('country') }}">
+                                                    <input type="text" required="" placeholder="Country of Birth*" class="form-control" style="height:35px;" name="country" value="{{ $player->country_of_birth }}">
                                                 </div>
                                                 <div class="custom-file mb-3">
-                                                    <input type="file" class="custom-file-input" id="customFile" name="player_image" value="{{ old('player_image') }}">
+                                                    <input type="file" class="custom-file-input" id="customFile" name="player_image" value="{{ $player->player_image }}">
                                                     <label class="custom-file-label" for="customFile">Upload Player Image</label>
                                                 </div>
+                                                {{Form::hidden('_method','PUT ')}}
                                                 <div class="form-group">
-                                                    <button type="submit" style="width: 100%; height:40px;" class="tg-btn submit">send</button>
+                                                    <button type="submit" style="width: 100%; height:40px;" class="tg-btn submit">Update Player</button>
                                                 </div>
+                                                
                                             </fieldset>
                                         </form>
                                     </div>
