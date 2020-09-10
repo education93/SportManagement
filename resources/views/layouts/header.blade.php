@@ -280,6 +280,9 @@
                                                {!! Score::not_registered_yet(Auth::user()->id) !!}
                                                 @endif
                                                 @endif
+                                                @if (Auth::user()->user_type=="admin")
+                                                    <li><a href='/admin'>Admin</a></li>
+                                                @endif
                                             </ul>
                                         </li>
                                     </ul>

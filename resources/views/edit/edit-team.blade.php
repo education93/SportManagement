@@ -19,11 +19,11 @@
                 <div class="row">
                     <div class="tg-banner-content tg-haslayout">
                         <div class="tg-pagetitle">
-                            <h1>Add Teams</h1>
+                            <h1>Update Team</h1>
                         </div>
                         <ol class="tg-breadcrumb">
                             <li><a href="#">Home</a></li>
-                            <li class="active">Add Teams</li>
+                            <li class="active">Update Teams</li>
                         </ol>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
             <section class="tg-main-section tg-paddingbottom-zero tg-haslayout">
                 <div class="container">
                     <div class="tg-section-name">
-                        <h2>Add Players</h2>
+                        <h2>Edit Team</h2>
                     </div>
                     <div class="col-sm-11 col-xs-11 pull-right">
                         <div class="row">
@@ -48,7 +48,7 @@
                                     <div class="col-md-5 col-sm-12 col-xs-12">
                                         <div class="tg-contactinfobox">
                                             <div class="tg-section-heading">
-                                                <h4>Please Add Team &amp; image</h4>
+                                                <h4>Update Team</h4>
                                             </div>
                                             <img src="{{ asset('images/simphiwe.jpg')}}" />
                                         </div>
@@ -93,6 +93,7 @@
                                                 <div class="form-group">
                                                     <textarea required placeholder="About the Team*" style="height: 100px;" name="about" value="{{ old('about') }}"></textarea>
                                                 </div>
+                                                {{Form::hidden('_method','PUT ')}}
                                                 <div class="form-group">
                                                     <button type="submit" style="width: 100%; height:40px;" class="tg-btn submit">Add Team</button>
                                                 </div>

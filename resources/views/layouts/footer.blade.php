@@ -238,8 +238,8 @@
                                 <div class="tg-select">
                                     <select id="homeTeam" name="league" style="height:35px;">
                                         <option >Select League*</option>
-                                        @foreach ($league as $league)
-                                            <option>{{$league->league_name}}</option>
+                                        @foreach ($league as $lg)
+                                            <option>{{$lg->league_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

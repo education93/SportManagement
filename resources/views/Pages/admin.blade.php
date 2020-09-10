@@ -48,7 +48,7 @@
                                     <div class="col-md-5 col-sm-12 col-xs-12">
                                         <div class="tg-contactinfobox">
                                             <div class="tg-section-heading">
-                                                <h4>Team Admin</h4>
+                                                <h4>Admin</h4>
                                             </div>
                                             <img src="{{ asset('images/simphiwe.jpg')}}" />
                                         </div>
@@ -56,6 +56,7 @@
                                     <div class="col-md-7 col-sm-12 col-xs-12">
                                       @include('layouts.messages')
                                         <div class="accordion" id="accordionExample">
+                                          @if (Auth::user()->user_type=="")
                                             <div class="card">
                                               <div class="card-header" id="headingOne">
                                                 <h1 class="mb-0">
@@ -82,7 +83,7 @@
                                                           <tr>
                                                             @foreach ($players as $key => $player)
                                                           <th scope="row">{{$key+1}}</th>
-                                                          <td>{{$player->full_name}}</td>>
+                                                          <td>{{$player->full_name}}</td>
                                                             <td>{{$player->jersey_no}}</td>
                                                           <td><a href='/players/{{$player->id}}/edit-player'> <button type="button" class="btn btn-primary btn-sm">Edit</button></a>
                                                           
@@ -162,24 +163,193 @@
                                               </div>
                                             </div>
                                             <div class="card">
-                                              <div class="card-header" id="headingThree">
+                                              <div class="card-header" id="heading2">
                                                 <h1 class="mb-0">
-                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                                     Top Players
                                                   </button>
                                                 </h1>
                                               </div>
-                                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                              <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
                                                 <div class="card-body">
                                                  
-
-
 
                                                 </div>
                                               </div>
                                             </div>
+                                            @else
+                                            <div class="card">
+                                              <div class="card-header" id="heading1">
+                                                <h1 class="mb-0">
+                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                                    Referee
+                                                  </button>
+                                                </h1>
+                                              </div>
+                                              <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                  <table class="table table-striped table-light">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Full Name</th>
+                                                        
+                                                        <th scope="col">Province</th>
+                                                        <th scope="col">Edit</th>
+                                                        <th scope="col">Delete</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        @foreach ($referees as $key => $referee)
+                                                      <th scope="row">{{$key+1}}</th>
+                                                      <td>{{$referee->fullname}}</td>
+                                                        <td>{{$referee->HomeTown}}</td>
+                                                      <td><a href='/referee/{{$referee->id}}/edit-referee'> <button type="button" class="btn btn-primary btn-sm">Edit</button></a>
+                                                      
+                                                      </td>
+                                                        <td>
+                                                          {!!Form::open(['action'=> ['RefereeController@destroy',$referee->id],'method'=>'POST'])!!}
+                                                          {{Form::hidden('_method','DELETE')}}
+                                                          {{Form::submit('Delete Referee',['class'=>'btn btn-danger btn-sm'])}}
+                                                      {!!Form::close()!!}
+                                                        </td>
+                                                      </tr>
+                                                     @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card">
+                                              <div class="card-header" id="heading6">
+                                                <h1 class="mb-0">
+                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                                    Venues
+                                                  </button>
+                                                </h1>
+                                              </div>
+                                              <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                  <table class="table table-striped table-light">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Location</th>
+                                                        <th scope="col">Edit</th>
+                                                        <th scope="col">Delete</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        @foreach ($venues as $key => $venue)
+                                                      <th scope="row">{{$key+1}}</th>
+                                                      <td>{{$venue->name}}</td>
+                                                        <td>{{$venue->location}}</td>
+                                                      <td><a href='/venues/{{$venue->id}}/edit-venue'> <button type="button" class="btn btn-primary btn-sm">Edit</button></a>
+                                                      </td>
+                                                        <td>
+                                                          {!!Form::open(['action'=> ['VenueController@destroy',$venue->id],'method'=>'POST'])!!}
+                                                          {{Form::hidden('_method','DELETE')}}
+                                                          {{Form::submit('Delete Venue',['class'=>'btn btn-danger btn-sm'])}}
+                                                      {!!Form::close()!!}
+                                                        </td>
+                                                      </tr>
+                                                     @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card">
+                                              <div class="card-header" id="heading8">
+                                                <h1 class="mb-0">
+                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                                    League
+                                                  </button>
+                                                </h1>
+                                              </div>
+                                              <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                  <table class="table table-striped table-light">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">League Name</th>
+                                                        <th scope="col">No of Teams</th>
+                                                        <th scope="col">Edit</th>
+                                                        <th scope="col">Delete</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        @foreach ($leagues as $key => $lg)
+                                                      <th scope="row">{{$key+1}}</th>
+                                                      <td>{{$lg->league_name}}</td>
+                                                        <td>{{$lg->no_of_teams}}</td>
+                                                      <td><a href='/league/{{$lg->id}}/edit-league'> <button type="button" class="btn btn-primary btn-sm">Edit</button></a>
+                                                      
+                                                      </td>
+                                                        <td>
+                                                          {!!Form::open(['action'=> ['LeaguesController@destroy',$lg->id],'method'=>'POST'])!!}
+                                                          {{Form::hidden('_method','DELETE')}}
+                                                          {{Form::submit('Delete League',['class'=>'btn btn-danger btn-sm'])}}
+                                                      {!!Form::close()!!}
+                                                        </td>
+                                                      </tr>
+                                                     @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card">
+                                              <div class="card-header" id="heading4">
+                                                <h1 class="mb-0">
+                                                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                                    Fixture
+                                                  </button>
+                                                </h1>
+                                              </div>
+                                              <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                  <table class="table table-striped table-light">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Home Team</th>
+                                                        <th scope="col">Vs</th>
+                                                        <th scope="col">Away Team</th>
+                                                        <th scope="col">Edit</th>
+                                                        <th scope="col">Delete</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        @foreach ($fixtures as $key => $fx)
+                                                      <th scope="row">{{$key+1}}</th>
+                                                      <td>{{$fx->team_1_name}}</td>
+                                                        <td>vs</td>
+                                                        <td>{{$fx->team_2_name}}</td>
+                                                      <td><a href='/fixture/{{$fx->id}}/edit-fixture'> <button type="button" class="btn btn-primary btn-sm">Edit</button></a>
+                                                      
+                                                      </td>
+                                                        <td>
+                                                          {!!Form::open(['action'=> ['FixtureController@destroy',$fx->id],'method'=>'POST'])!!}
+                                                          {{Form::hidden('_method','DELETE')}}
+                                                          {{Form::submit('Delete Fixture',['class'=>'btn btn-danger btn-sm'])}}
+                                                      {!!Form::close()!!}
+                                                        </td>
+                                                      </tr>
+                                                     @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          @endif
                                           </div>
-                                        
                                     </div>
                                     
                                 </div>

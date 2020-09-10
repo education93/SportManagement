@@ -93,7 +93,7 @@ class VenueController extends Controller
         $venues = Venues::find($id);
         $league = League::all();
         $leage = Auth::user()->league;
-        return view('edit.edit-fixture')->with(['venues'=>$venues,'league_name'=>$leage,'league'=>$league]);
+        return view('edit.venue-edit')->with(['venues'=>$venues,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -113,7 +113,7 @@ class VenueController extends Controller
         
             ]);
 
-            $post = new Venues;
+            $post = Venues::find($id);
             $post->name = $request->input('Vname');
             $post->province= $request->input('Vprovince');
             $post->location = $request->input('Vcity');
@@ -136,6 +136,6 @@ class VenueController extends Controller
         $post = Venues::find($id);
         $post->delete();
 
-        return redirect('/leagueadmin')->with('success','Venue Deleted Successfully');
+        return redirect()->back()->with('error','Venue Deleted Successfully');
     }
 }

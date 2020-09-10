@@ -87,7 +87,7 @@ class LeaguesController extends Controller
         $leagues = League::find($id);
         $league = League::all();
         $leage = Auth::user()->league;
-        return view('edit.edit-fixture')->with(['leagues'=>$leagues,'league_name'=>$leage,'league'=>$league]);
+        return view('edit.league-edit')->with(['leagues'=>$leagues,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -105,22 +105,14 @@ class LeaguesController extends Controller
         
             ]);
 
-            $post = new League;
+            $post = $post = League::find($id);
             $post->league_name = $request->input('Lname');
             $post->no_of_teams= $request->input('Lno_teams');
             
-            $name=  DB::table('league')
-                    ->select('*')
-                   ->where('league_name', $post->league_name)
-                    ->get();
-
-            // Camera
-           if($name->isEmpty() ){
+            
             $post->save();
-            return redirect()->back()->with('success','League  Succeditedessfully');
-           }else{
-            return redirect()->back()->with('error','League Already Exist');
-           }
+            return redirect()->back()->with('success','League Updated  Successfully');
+           
     }
 
     /**
@@ -134,6 +126,6 @@ class LeaguesController extends Controller
         $post = League::find($id);
         $post->delete();
 
-        return redirect()->back()->with('success','Fixture Successfully');
+        return redirect()->back()->with('error','League Deleted Successfully');
     }
 }

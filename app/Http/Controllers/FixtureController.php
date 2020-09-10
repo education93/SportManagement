@@ -136,8 +136,11 @@ class FixtureController extends Controller
     {
         $fixtures = Fixtures::find($id);
         $league = League::all();
+        $venues = Venues::all();
+        $referees = Referee::all();
+        $teams = Teams::all();
         $leage = Auth::user()->league;
-        return view('edit.edit-fixture')->with(['fixtures'=>$fixtures,'league_name'=>$leage,'league'=>$league]);
+        return view('edit.edit-fixture')->with(['venues'=>$venues,'referees'=>$referees,'teams'=>$teams,'fixture'=>$fixtures,'league_name'=>$leage,'league'=>$league]);
     
     }
 
@@ -158,7 +161,7 @@ class FixtureController extends Controller
         
             ]);
 
-            $post = new Fixtures;
+            $post =  $post = Fixtures::find($id);
             $post->team_1_name = $request->input('home_team');
             $post->team_2_name= $request->input('away_team');
             $post->match_date = $request->input('match_date');
@@ -220,7 +223,7 @@ class FixtureController extends Controller
         $post = Fixtures::find($id);
         $post->delete();
 
-        return redirect('/leagueadmin')->with('success','Fixture Deleted Successfully');
+        return redirect()->back()->with('error','Fixture Deleted Successfully');
     
     }
 }

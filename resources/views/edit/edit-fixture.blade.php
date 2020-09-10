@@ -18,11 +18,11 @@
                 <div class="row">
                     <div class="tg-banner-content tg-haslayout">
                         <div class="tg-pagetitle">
-                            <h1>contact</h1>
+                            <h1>Fixture</h1>
                         </div>
                         <ol class="tg-breadcrumb">
                             <li><a href="#">Home</a></li>
-                            <li class="active">contact</li>
+                            <li class="active">Edit Fixture</li>
                         </ol>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
             <section class="tg-main-section tg-paddingbottom-zero tg-haslayout">
                 <div class="container">
                     <div class="tg-section-name">
-                        <h2>Add Fixture</h2>
+                        <h2>Edit Fixture</h2>
                     </div>
                     <div class="col-sm-11 col-xs-11 pull-right">
                         <div class="row">
@@ -60,13 +60,13 @@
                                 
                                 <div class="row mt-5">
 
-                                    <form action="/create/fixture/store" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                    {!! Form::open(['action'=>['FixtureController@update',$fixture->id],'method'=>'POST','class'=>'tg-commentform help-form','id'=>'tg-commentform','enctype'=>'multipart/form-data']) !!}
                                         @csrf 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <fieldset>
                                                 <div class="tg-select">
                                                     <select id="homeTeam" value="{{ old('home_team') }}" name="home_team" style="height:35px;">
-                                                        <option value="">Select Home Team*</option>
+                                                        <option>{{ $fixture->team_1_name}}</option>
                                                         @foreach ($teams as $team)
                                                             <option>{{$team->name}}</option>
                                                         @endforeach
@@ -78,8 +78,8 @@
                                             <fieldset>
                                                 <div class="form-group">
                                                     <div class="tg-select">
-                                                        <select id="awayTeam" value="{{ old('away_team') }}" name="away_team" style="height:35px;">
-															<option value="">Select Away Team*</option>
+                                                        <select id="awayTeam"  name="away_team" style="height:35px;">
+                                                        <option>{{ $fixture->team_2_name}}</option>
 															@foreach ($teams as $team)
                                                               <option >{{$team->name}}</option>
                                                             @endforeach
@@ -95,18 +95,18 @@
                                             <fieldset>
                                                 <div class="form-group">
                                                     <div class="tg-select">
-                                                        <select name="referee" value="{{ old('referee') }}" style="height:35px;">
-															<option value="">Select Referee*</option>
+                                                        <select name="referee"  style="height:35px;">
+															<option>Select Referee</option>
 															@foreach ($referees as $referee)
-                                                               <option>{{$referee->fullname}}</option>
+                                                               <option value="{{$referee->id}}">{{$referee->fullname}}</option>
                                                             @endforeach
 														</select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="tg-select" style="height:35px;">
-                                                        <select name="field" value="{{ old('field') }}" style="height:35px;">
-															<option value="">Select Field of Play*</option>
+                                                        <select name="field"  style="height:35px;">
+															<option >Select Field of Play*</option>
 															@foreach ($venues as $venue)
                                                               <option value="{{$venue->id}}">{{$venue->name}}</option>
                                                              @endforeach
@@ -115,8 +115,9 @@
                                                 </div>
                                                 <p style="text-align:center;" id="errorT" class="alert-danger"></p>
                                                 <div class="form-group">
-                                                    <input type="datetime-local" value="{{ old('match_date') }}" id="matchDate" title="Match Date" required=""  min="2020-06-07T00:00" max="2021-06-14T00:00" class="form-control" style="height:35px;" name="match_date">
+                                                    <input type="datetime-local" value="{{ $fixture->match_date }}" id="matchDate" title="Match Date" required=""  min="2020-06-07T00:00" max="2021-06-14T00:00" class="form-control" style="height:35px;" name="match_date">
                                                 </div>
+                                                {{Form::hidden('_method','PUT ')}}
                                                 <div class="form-group">
                                                     <button type="submit" id="btnSubmit" style="width: 100%; height:40px;" class="tg-btn submit">send</button>
                                                 </div>

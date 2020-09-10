@@ -158,7 +158,7 @@ class PlayerController extends Controller
         }
 
 
-            $post = new Players;
+        $post = Players::find($id);
             $post->full_name = $request->input('fullname');
             $post->jersey_no = $request->input('Jerseyno');
             $id = Auth::user()->id;
@@ -174,22 +174,9 @@ class PlayerController extends Controller
             $post->home_town = $request->input('town');
             $post->player_image = $fileNameToStore;
 
-                    foreach ($team_name as $name) {
-                        $team= $name->name;
-                    }
-                    $fullname = $request->input('fullname');
-
-                     $match1=  DB::table('players')
-                    ->select('*')
-                   ->where(['player_team'=>$team,'full_name'=>$fullname])
-                    ->get();
-
-           if($match1->isEmpty()){
             $post->save();
-            return redirect()->back()->with('success','Player Edited Successfully');
-           }else{
-            return redirect()->back()->with('error','Player Already Exist');
-           }
+            return redirect()->back()->with('success','Player Updated Successfully');
+           
                
     }
 
@@ -209,7 +196,7 @@ class PlayerController extends Controller
             Storage::delete('public/images/players'.$post->image);
         }
 
-        return redirect()->back()->with('success','Player Deleted Successfully');
+        return redirect()->back()->with('error','Player Deleted Successfully');
     
     }
 }

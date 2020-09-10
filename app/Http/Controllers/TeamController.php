@@ -157,6 +157,12 @@ class TeamController extends Controller
     public function edit($id)
     {
         //
+
+        //
+        $teams = Teams::find($id);
+        $league = League::all();
+        $leage = Auth::user()->league;
+        return view('edit.edit-team')->with(['teams'=>$teams,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -229,7 +235,7 @@ class TeamController extends Controller
         }
 
 
-            $post = new Teams;
+        $post = Teams::find($id);
             $league = Auth::user()->league;
             $post->league_name = $league;
             $post->name = $request->input('name');
@@ -246,7 +252,7 @@ class TeamController extends Controller
            
 
             $post->save();
-            return redirect('/teams/create')->with('success','Team Added Successfully');
+            return redirect()->back()->with('success','Team Updated Successfully');
 
     }
 
@@ -258,6 +264,9 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Teams::find($id);
+        $post->delete();
+
+        return redirect()->back()->with('error','Team Deleted Successfully');
     }
 }

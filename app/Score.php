@@ -8,6 +8,7 @@ use App\Scores;
 use App\Players;
 use App\Results;
 use App\Teams;
+use Illuminate\Support\Facades\Auth;
 
 class Score
 {
@@ -62,6 +63,7 @@ class Score
         $results = Teams::select('name')
         ->where('owner_id', '=', $id)
     ->get();
+
         foreach ($results as $result) {
             if ($result->name=="") {
                 echo "";
@@ -69,6 +71,7 @@ class Score
                 echo "<li><a href='/players/create'>Add Player</a></li><li><a href='/admin'>Admin</a></li>";
             }
         }
+        
     }
    
 }

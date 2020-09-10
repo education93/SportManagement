@@ -10,7 +10,9 @@ use App\Players;
 use App\Database;
 use App\League;
 use App\Log;
+use App\Referee;
 use App\Teams;
+use App\Venues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -130,17 +132,24 @@ class PagesController extends Controller
     {
        
     
+       if (Auth::user()->user_type=="") {
+           $leage = Auth::user()->league;
+           $league = League::all();
+           $id = Auth::user()->id;
+           $team = Teams::where('owner_id', $id)->first();
+           $team_name =DB::select("SELECT name FROM teams WHERE owner_id = '$id'");
+           foreach ($team_name as $name) {
+               $players = DB::select("SELECT * FROM players WHERE player_team = '$name->name'");
+           }
        
-        $leage = Auth::user()->league;
+           return view('Pages.admin')->with(['team'=>$team,'league'=>$league,'league_name'=>$leage,'players'=>$players]);
+       }else{
         $league = League::all();
-        $id = Auth::user()->id;
-        $team = Teams::where('owner_id',$id)->first();
-        $team_name =DB::select("SELECT name FROM teams WHERE owner_id = '$id'");
-        foreach ($team_name as $name) {
-            $players = DB::select("SELECT * FROM players WHERE player_team = '$name->name'");
-        }
-       
-        return view('Pages.admin')->with(['team'=>$team,'league'=>$league,'league_name'=>$leage,'players'=>$players]);
+        $fixture = Fixtures::all();
+        $referees = Referee::all();
+        $venues = Venues::all();
+        return view('Pages.admin')->with(['fixtures'=>$fixture,'referees'=>$referees,'venues'=>$venues,'league'=>$league,'leagues'=>$league]);
+       }
             // end Results
     }
     /**

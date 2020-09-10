@@ -90,7 +90,7 @@ class RefereeController extends Controller
         $referees = Referee::find($id);
         $league = League::all();
         $leage = Auth::user()->league;
-        return view('edit.edit-fixture')->with(['referees'=>$referees,'league_name'=>$leage,'league'=>$league]);
+        return view('edit.referee-edit')->with(['referee'=>$referees,'league_name'=>$leage,'league'=>$league]);
     }
 
     /**
@@ -110,7 +110,8 @@ class RefereeController extends Controller
          'Remail'=>'required',
              ]);
  
-             $post = new Referee;
+            
+             $post = Referee::find($id);
              $post->fullname = $request->input('Rname');
              $post->province= $request->input('Rprovince');
              $post->HomeTown = $request->input('Rhometown');
@@ -119,7 +120,7 @@ class RefereeController extends Controller
  
         
              $post->save();
-             return redirect()->back()->with('success','Referee Edited Successfully');
+             return redirect()->back()->with('success','Referee Updated Successfully');
             
     }
 
@@ -134,6 +135,6 @@ class RefereeController extends Controller
         $post = Referee::find($id);
         $post->delete();
 
-        return redirect('/leagueadmin')->with('success','Referee Deleted Successfully');
+        return redirect()->back()->with('error','Referee Deleted Successfully');
     }
 }
