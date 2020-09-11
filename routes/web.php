@@ -44,9 +44,9 @@ Route::post('referee/create/store', 'RefereeController@store');
 Route::resource('referee', 'RefereeController');
 Route::get('referee/{id}/edit-referee','RefereeController@edit');
 
-Route::post('score/create/store', 'ScoreController@store');
-Route::resource('score', 'ScoreController');
-Route::get('score/{id}/edit-score','ScoreController@edit');
+Route::post('create/scores/store', 'ScoresController@store');
+Route::resource('score', 'ScoresController');
+Route::get('score/{id}/add-score','ScoresController@edit');
 
 Route::post('league/create/store', 'LeaguesController@store');
 Route::resource('league', 'LeaguesController');

@@ -73,5 +73,19 @@ class Score
         }
         
     }
+
+    public static function players($id){
+        $results = Players::select('id','full_name')
+        ->where('player_team', '=', $id)
+    ->get();
+    foreach ($results as $result) {
+        if ($result) {
+            echo "<option value=".$result->id.">".$result->full_name."</option>";
+        } else {
+            echo "";
+        }
+    }
+
+    }
    
 }

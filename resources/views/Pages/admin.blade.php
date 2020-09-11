@@ -193,7 +193,6 @@
                                                       <tr>
                                                         <th scope="col">#</th>
                                                         <th scope="col">Full Name</th>
-                                                        
                                                         <th scope="col">Province</th>
                                                         <th scope="col">Edit</th>
                                                         <th scope="col">Delete</th>

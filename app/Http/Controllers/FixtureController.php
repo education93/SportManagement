@@ -52,12 +52,13 @@ class FixtureController extends Controller
         'referee'=>'required',
         'field'=>'required',
         'match_date'=>'required',
-        
+        'league_name'=>'required',
             ]);
 
             $post = new Fixtures;
             $post->team_1_name = $request->input('home_team');
             $post->team_2_name= $request->input('away_team');
+            $post->league_name= $request->input('league_name');
             $post->match_date = $request->input('match_date');
             $post->venue_id =$request->input('field');
             $post->referee =$request->input('referee');
@@ -117,7 +118,7 @@ class FixtureController extends Controller
     {
         $fixtures = DB::table('fixtures')
          ->join('venues', 'fixtures.venue_id', '=', 'venues.id')
-         ->select('fixtures.*', 'venues.*')
+         ->select('fixtures.*','fixtures.id as f_id', 'venues.*')
          ->orderBy('fixtures.match_date','ASC')
          ->get();
 

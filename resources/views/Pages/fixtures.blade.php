@@ -78,7 +78,18 @@
 																$reformatted_date = date('Y-m-d',strtotime($date));
 																$reformatted_time = date('g:i A',strtotime($time));  echo $reformatted_date." ".$reformatted_time; ?>  {{$fixture->name}}, {{$fixture->location}}</address>
 															<div class="tg-btnbox">
-																<a class="tg-btn" href="#"><span>book my ticket</span></a> 
+																@if (Auth::check())
+                                                @if (Auth::user()->user_type=="admin")
+												<div class="tg-btnsbox">	
+												<a class="tg-btn" href="/score/{{$fixture->f_id}}/add-score">Add Scores</a>
+												</div>
+												@else
+												<div class="tg-btnsbox">
+														
+													<a class="tg-btn" href="#">book my ticket</a>
+												</div>
+													@endif
+													@endif
 															</div>
 														</div>
 													</div>
@@ -162,10 +173,19 @@
 															<li><address>{{$fixture->name}}, {{$fixture->location}}</address></li>
 														</ul>
 													</div>
-													<div class="tg-btnsbox">
+													
+													@if (Auth::check())
+                                                @if (Auth::user()->user_type=="admin")
+												<div class="tg-btnsbox">	
+												<a class="tg-btn" href="/score/{{$fixture->f_id}}/add-score">Add Scores</a>
+												</div>
+												@else
+												<div class="tg-btnsbox">
 														
-														<a class="tg-btn" href="#">book my ticket</a>
-													</div>
+													<a class="tg-btn" href="#">book my ticket</a>
+												</div>
+													@endif
+													@endif
 												</div>
 											</div>
 											@endforeach

@@ -59,82 +59,75 @@
                                 @include('layouts.messages')
                                 
                                 <div class="row mt-5">
-
-                                    <form action="/create/fixture/store" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <form action="/create/scores/store" method="post" class="tg-commentform help-form" id="tg-commentform">
                                         @csrf 
-                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                        
                                             <fieldset>
+                                                <input hidden name="fixture_id" value="{{$fixture->id}}" />
                                                 <div class="tg-select">
-                                                    <select id="homeTeam" value="{{ old('home_team') }}" name="home_team" style="height:35px;">
-                                                        <option value="">Select Home Team*</option>
-                                                        @foreach ($teams as $team)
-                                                            <option>{{$team->name}}</option>
-                                                        @endforeach
+                                                    <select id="homeTeam"  name="team_name" style="height:35px;">
+                                                        <option>{{$fixture->team_1_name}}</option>
                                                     </select>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                Score By :
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="tg-select" style="height:35px;">
+                                                                    <select name="player_id" style="height:35px;">
+                                                                        <option value="">Select Player*</option>
+                                                                        {!! Score::players($fixture->team_1_name) !!}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </fieldset>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <button type="submit" id="btnSubmit" style="width: 100%; height:40px;" class="tg-btn submit">its a Gooal</button>
+                                            </div>
+                                       
+                                    </form>
+                                </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <form action="/create/scores/store" method="post" class="tg-commentform help-form" id="tg-commentform">
+                                        @csrf
                                             <fieldset>
+                                                <input hidden name="fixture_id" value="{{$fixture->id}}" />
                                                 <div class="form-group">
                                                     <div class="tg-select">
-                                                        <select id="awayTeam" value="{{ old('away_team') }}" name="away_team" style="height:35px;">
-															<option value="">Select Away Team*</option>
-															@foreach ($teams as $team)
-                                                              <option >{{$team->name}}</option>
-                                                            @endforeach
+                                                        <select id="awayTeam"  name="team_name" style="height:35px;">
+															<option>{{$fixture->team_2_name}}</option>
+															
 														</select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            Score By :
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="tg-select" style="height:35px;">
+                                                                <select name="player_id" style="height:35px;">
+                                                                    <option value="">Select Player*</option>
+                                                                    {!! Score::players($fixture->team_2_name) !!}
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                        </div>
-                                        <div class="col-md-3">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p style="text-align:center;" id="errorM" class="alert-danger"></p>
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <div class="tg-select">
-                                                        <select name="referee" value="{{ old('referee') }}" style="height:35px;">
-															<option value="">Select Referee*</option>
-															@foreach ($referees as $referee)
-                                                               <option>{{$referee->fullname}}</option>
-                                                            @endforeach
-														</select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="tg-select" style="height:35px;">
-                                                        <select name="field"  style="height:35px;">
-															<option value="{{ old('field') }}">Select Field of Play*</option>
-															@foreach ($venues as $venue)
-                                                              <option value="{{$venue->id}}">{{$venue->name}}</option>
-                                                             @endforeach
-														</select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="tg-select" style="height:35px;">
-                                                        <select name="league_name" value="{{ old('field') }}" style="height:35px;">
-															<option value="{{ old('field') }}">Select league*</option>
-															@foreach ($league as $lg)
-                                                              <option >{{$lg->league_name}}</option>
-                                                             @endforeach
-														</select>
-                                                    </div>
-                                                </div>
-                                                <p style="text-align:center;" id="errorT" class="alert-danger"></p>
-                                                <div class="form-group">
-                                                    <input type="datetime-local" value="{{ old('match_date') }}" id="matchDate" title="Match Date" required=""  min="2020-06-07T00:00" max="2021-06-14T00:00" class="form-control" style="height:35px;" name="match_date">
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" id="btnSubmit" style="width: 100%; height:40px;" class="tg-btn submit">send</button>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-md-3">
-                                        </div>
+                                            <div class="form-group">
+                                                <button type="submit" id="btnSubmit" style="width: 100%; height:40px;" class="tg-btn submit">its a Gooal</button>
+                                            </div>
+                                      
+                                        
                                     </form> 
+                                </div>
                                 </div>
                             </div>
                         </div>
