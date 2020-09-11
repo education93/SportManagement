@@ -46,73 +46,75 @@
         <!--************************************
 				Mobile Menu Start
 		*************************************-->
-        <div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
-            <span id="tg-close" class="tg-close fa fa-close"></span>
-            <div class="tg-colhalf">
+		<div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
+			<span id="tg-close" class="tg-close fa fa-close"></span>
+			<div class="tg-colhalf">
                 <ul>
                     <li>
-                        <a href="{{ url('/')}}">Main</a>
-                        
+                        <a href="/">Main</a>
                     </li>
-                    <li class="active">
-                        <a href="#">League</a>
-                        <ul class="tg-dropdown-menu">
-                            @foreach ($league as $item)
-                            <li><a href="{{ url('teams')}}/{{$item->league_name}}">{{$item->league_name}}</a></li>
-                                @endforeach
-                            
-                        </ul>
-                    </li>
-                    <li><a href="buyticket">Buy Tickets</a></li>
                     <li>
-                        <a href="#">Match Results</a>
-                        <ul class="tg-dropdown-menu">
-                            @foreach ($league as $item)
-                            <li><a href="{{ url('matchresult')}}/{{$item->league_name}}">{{$item->league_name}} Results</a></li>
-                                @endforeach
+                        
+                                            
+                                                 @foreach ($league as $item)
+                                            <li><a href="{{ url('/teams')}}/{{$item->league_name}}">{{$item->league_name}}</a></li>
+                                                @endforeach
+                                           
                         </ul>
+                    </li>
+                    {{-- <li><a href="buyticket.html">Buy Tickets</a></li> --}}
+                    <li>
+                       
+                                            <ul class="tg-dropdown-menu">
+                                                @foreach ($league as $item)
+                                                <li><a href="{{ url('matchresult')}}/{{$item->league_name}}">{{$item->league_name}} Results</a></li>
+                                                    @endforeach
+                                            </ul>
                     </li>
                 </ul>
             </div>
             <div class="tg-colhalf">
                 <ul>
                     <li>
-                        <a href="#">fixtures</a>
-                        <ul class="tg-dropdown-menu">
-                            <@foreach ($league as $item)
-                            <li><a href="{{ url('fixtures')}}/{{$item->league_name}}">{{$item->league_name}} Fixture</a></li>
-                                @endforeach
-                        </ul>
+                    
+                                            
+                                                @foreach ($league as $item)
+                                            <li><a href="{{ url('fixtures')}}/{{$item->league_name}}">{{$item->league_name}} Fixtures</a></li>
+                                                @endforeach
+                                           
                     </li>
                     <li>
-                        <a href="#">Log Table</a>
+                        <a href="#">Log</a>
                         <ul class="tg-dropdown-menu">
                             @foreach ($league as $item)
                             <li><a href="{{ url('log-table')}}/{{$item->league_name}}">{{$item->league_name}} Table</a></li>
                                 @endforeach
-                           
+                            
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class=" fa fa-navicon"></i></a>
-                        <ul>@if (Auth::check())
-                            @if (Auth::user()->user_type==="admin")
-                            <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
-                            <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
-                            <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
-                            <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
-                            @else
-                            <li><a href="{{ url('/players/create')}}">Add Player</a></li>
-                            <li><a href="{{ url('/teams/create')}}">Add Team</a></li>
-                            <li><a href="{{ url('/teams/create')}}">Admin</a></li>
-                            @endif
-                            @endif
-                        </ul>
-                    </li>
+                    {{-- <li><a href="contactus.html">Contact</a></li> --}}
+                    @if (Auth::check())
+                                                @if (Auth::user()->user_type=="admin")
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-league">Add League</a></li>
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-venues">Add Venue</a></li>
+                                                <li><a href="javascript()" data-toggle="modal" data-target="#add-referee">Add Referee</a></li>
+                                                <li><a href="{{ url('/fixtures/create')}}"> Add Fixture</a></li>
+                                                
+                                                @else
+                                                
+                                                <li><a href="{{ url('/teams/create')}}">Add Team</a></li>
+                                               {!! Score::not_registered_yet(Auth::user()->id) !!}
+                                                @endif
+                                                @endif
+                                                @if (Auth::check())
+                                                @if (Auth::user()->user_type=="admin")
+                                                    <li><a href='/admin'>Admin</a></li>
+                                                @endif
+                                                @endif
                 </ul>
             </div>
-        </div>
-        <!--************************************
+		</div>
+		<!--************************************
 				Mobile Menu End
 		*************************************-->
         <!--************************************
@@ -235,7 +237,7 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-                                        <li><a href="#">Buy Tickets</a></li>
+                                        {{-- <li><a href="#">Buy Tickets</a></li> --}}
                                         <li>
                                             <a href="#">Match Results</a>
                                             <ul class="tg-dropdown-menu">
